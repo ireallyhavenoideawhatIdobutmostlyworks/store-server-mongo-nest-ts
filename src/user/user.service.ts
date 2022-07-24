@@ -20,11 +20,6 @@ export class UserService {
     return this.usersRepository.findOne({where: {email: email}})
   }
 
-  public async removeByEmail(email: string): Promise<void> {
-    const user = await this.usersRepository.findOne({where: {email: email}});
-    this.usersRepository.delete(user._id);
-  }
-  
   public async create(userDto: UserDto): Promise<void> {
     await this.usersRepository.save(userDto);
   }
@@ -32,5 +27,10 @@ export class UserService {
   public async updateByEmail(email: string, userDto: UserDto): Promise<void> {
     const user = await this.usersRepository.findOne({where: {email: email}});
     this.usersRepository.update(user._id, userDto);
+  }
+
+  public async removeByEmail(email: string): Promise<void> {
+    const user = await this.usersRepository.findOne({where: {email: email}});
+    this.usersRepository.delete(user._id);
   }
 }
