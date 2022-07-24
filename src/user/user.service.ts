@@ -16,21 +16,21 @@ export class UserService {
     return this.usersRepository.find();
   }
 
-  findOne(email: string): Promise<UserDto> {
+  findOneByEmail(email: string): Promise<UserDto> {
     return this.usersRepository.findOne({where: {email: email}})
   }
 
-  async remove(email: string): Promise<void> {
-    let user = this.usersRepository.findOne({where: {email: email}});
-    await this.usersRepository.delete((await user)._id);
+  async removeByEmail(email: string): Promise<void> {
+    const user = await this.usersRepository.findOne({where: {email: email}});
+    this.usersRepository.delete(user._id);
   }
   
   async create(userDto: UserDto): Promise<void> {
     await this.usersRepository.save(userDto);
   }
 
-  async update(email: string, userDto: UserDto): Promise<void> {
-    let user = this.usersRepository.findOne({where: {email: email}});
-    await this.usersRepository.update((await user)._id, userDto);
+  async updateByEmail(email: string, userDto: UserDto): Promise<void> {
+    const user = await this.usersRepository.findOne({where: {email: email}});
+    this.usersRepository.update(user._id, userDto);
   }
 }

@@ -10,27 +10,27 @@ export class UserController {
 
 
   @Post()
-  create(@Body() userDto: UserDto) {
+  protected create(@Body() userDto: UserDto) {
     return this.userService.create(userDto);
   }
 
   @Get()
-  findAll() {
+  protected findAll() {
     return this.userService.findAll();
   }
 
   @Get(':email')
-  findOne(@Param('email') email: string) {
-    return this.userService.findOne(email);
+  protected findOne(@Param('email') email: string) {
+    return this.userService.findOneByEmail(email);
   }
 
   @Patch(':email')
-  update(@Param('email') email: string, @Body() userDto: UserDto) {
-    return this.userService.update(email, userDto);
+  protected update(@Param('email') email: string, @Body() userDto: UserDto) {
+    return this.userService.updateByEmail(email, userDto);
   }
 
   @Delete(':email')
-  remove(@Param('email') email: string) {
-    return this.userService.remove(email);
+  protected remove(@Param('email') email: string) {
+    return this.userService.removeByEmail(email);
   }
 }
