@@ -6,31 +6,31 @@ import { UserDto } from './dto/user.dto';
 @Controller('user')
 export class UserController {
 
-  constructor(private readonly userService: UserService) {}
+  public constructor(private readonly userService: UserService) {}
 
 
   @Post()
-  protected create(@Body() userDto: UserDto) {
+  public create(@Body() userDto: UserDto) {
     return this.userService.create(userDto);
   }
 
   @Get()
-  protected findAll() {
+  public findAll() {
     return this.userService.findAll();
   }
 
   @Get(':email')
-  protected findOne(@Param('email') email: string) {
+  public findOne(@Param('email') email: string) {
     return this.userService.findOneByEmail(email);
   }
 
   @Patch(':email')
-  protected update(@Param('email') email: string, @Body() userDto: UserDto) {
+  public update(@Param('email') email: string, @Body() userDto: UserDto) {
     return this.userService.updateByEmail(email, userDto);
   }
 
   @Delete(':email')
-  protected remove(@Param('email') email: string) {
+  public remove(@Param('email') email: string) {
     return this.userService.removeByEmail(email);
   }
 }

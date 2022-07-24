@@ -7,29 +7,29 @@ import { User } from './entities/user.entity';
 @Injectable()
 export class UserService {
 
-  constructor(
+  public constructor(
     @InjectRepository(User) private usersRepository: Repository<User>
   ) {}
 
 
-  findAll(): Promise<UserDto[]> {
+  public findAll(): Promise<UserDto[]> {
     return this.usersRepository.find();
   }
 
-  findOneByEmail(email: string): Promise<UserDto> {
+  public findOneByEmail(email: string): Promise<UserDto> {
     return this.usersRepository.findOne({where: {email: email}})
   }
 
-  async removeByEmail(email: string): Promise<void> {
+  public async removeByEmail(email: string): Promise<void> {
     const user = await this.usersRepository.findOne({where: {email: email}});
     this.usersRepository.delete(user._id);
   }
   
-  async create(userDto: UserDto): Promise<void> {
+  public async create(userDto: UserDto): Promise<void> {
     await this.usersRepository.save(userDto);
   }
 
-  async updateByEmail(email: string, userDto: UserDto): Promise<void> {
+  public async updateByEmail(email: string, userDto: UserDto): Promise<void> {
     const user = await this.usersRepository.findOne({where: {email: email}});
     this.usersRepository.update(user._id, userDto);
   }
