@@ -31,6 +31,9 @@ export class UserService {
 
   public async removeByEmail(email: string): Promise<void> {
     const user = await this.usersRepository.findOne({where: {email: email}});
+
+    console.log(user !== null && user!==undefined)
+
     this.usersRepository.delete(user._id);
   }
 }
