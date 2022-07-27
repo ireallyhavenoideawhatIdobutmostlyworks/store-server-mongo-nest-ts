@@ -1,8 +1,9 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus, Res, HttpException } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserDto } from './dto/user.dto';
-import {Response} from 'express';
+import { Response } from 'express';
 import { ResponseCreator } from 'src/utils/response/response.creator';
+import { ResponseStatus } from 'src/utils/response/response.status';
 
 @Controller('user')
 export class UserController {
@@ -27,9 +28,9 @@ export class UserController {
     const isSuccess: boolean = await this.userService.create(userDto);
     
     if(isSuccess) {
-      return response.status(HttpStatus.CREATED).json(ResponseCreator.response());       
+      return response.status(HttpStatus.CREATED).json(ResponseCreator.response(ResponseStatus.SUCCESS));       
     } else { 
-      throw new HttpException(ResponseCreator.response(), HttpStatus.BAD_REQUEST);
+      throw new HttpException(ResponseCreator.response(ResponseStatus.ERROR), HttpStatus.BAD_REQUEST);
     }
   }
 
