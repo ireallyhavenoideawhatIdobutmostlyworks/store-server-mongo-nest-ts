@@ -23,8 +23,15 @@ export class UserService {
     return UserDtoConverter.convertToDto(userEntity);
   }
 
-  public async create(userDto: UserDto): Promise<void> {
+  public async create(userDto: UserDto): Promise<boolean> {
+    const userEntity: UserEntity = await this.usersRepository.findOne({where: {email: userDto.email}});
+
+    if(userEntity !== null) {
+      return false;
+    }
+
     await this.usersRepository.save(UserEntityConverter.convertToEntity(userDto));
+    return true;
   }
 
   public async updateByEmail(email: string, userDto: UserDto): Promise<void> {

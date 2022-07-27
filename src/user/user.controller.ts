@@ -1,6 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus, Res, HttpException } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserDto } from './dto/user.dto';
+import {Response} from 'express';
+import { ResponseCreator } from 'src/utils/response/response.creator';
 
 @Controller('user')
 export class UserController {
@@ -21,9 +23,14 @@ export class UserController {
   }
 
   @Post()
-  @HttpCode(201)
-  public create(@Body() userDto: UserDto) {
-    return this.userService.create(userDto);
+  public async create(@Body() userDto: UserDto, @Res() response: Response) {
+    const isSuccess: boolean = await this.userService.create(userDto);
+    
+    if(isSuccess) {
+      return response.status(HttpStatus.CREATED).json(ResponseCreator.response());       
+    } else { 
+      throw new HttpException(ResponseCreator.response(), HttpStatus.BAD_REQUEST);
+    }
   }
 
   @Patch(':email')
