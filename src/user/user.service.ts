@@ -1,11 +1,10 @@
 import { Body, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { ObjectID, Repository } from 'typeorm';
 import { UserDto } from './dto/user.dto';
 import { UserDtoConverter } from './dto/user.dto.converter';
 import { UserEntity } from './entities/user.entity';
 import { UserEntityConverter } from './entities/user.entity.converter';
-
 
 @Injectable()
 export class UserService {
@@ -29,8 +28,8 @@ export class UserService {
   }
 
   public async updateByEmail(email: string, userDto: UserDto): Promise<void> {
-    const userEntity: UserEntity = await this.usersRepository.findOne({where: {email: email}});
-    this.usersRepository.update(userEntity._id, userDto);
+    const _ObjectId: ObjectID = (await this.usersRepository.findOne({where: {email: email}}))._id;
+    this.usersRepository.update(_ObjectId, UserEntityConverter.convertToEntity(userDto));
   }
 
   public async removeByEmail(email: string): Promise<void> {

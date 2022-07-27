@@ -2,11 +2,10 @@ import { IsEmail, IsNotEmpty, IsString, Validate } from "class-validator";
 import e from "express";
 import { Entity, PrimaryGeneratedColumn, Column, ObjectID, ObjectIdColumn } from "typeorm"
 
-
 @Entity()
 export class UserEntity {
 
-    constructor(firstName: string, lastName: string, email: string) {
+    public constructor(firstName: string, lastName: string, email: string) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -14,21 +13,21 @@ export class UserEntity {
 
 
     @ObjectIdColumn()
-     _id: ObjectID;
+    public readonly _id: ObjectID;
 
     @IsNotEmpty()
     @IsString()
     @Column()
-     firstName: string
+    public readonly firstName: string
 
     @IsNotEmpty()
     @IsString()
     @Column()
-     lastName: string
+    public readonly lastName: string
 
     @IsNotEmpty()
     @IsEmail()
     @IsString()
     @Column()
-     email: string
+    public readonly email: string
 }

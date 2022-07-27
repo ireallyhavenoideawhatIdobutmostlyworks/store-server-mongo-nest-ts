@@ -1,7 +1,6 @@
 import { UserDto } from "../dto/user.dto";
 import { UserEntity } from "./user.entity";
 
-
 export class UserEntityConverter {
 
     private constructor(){}

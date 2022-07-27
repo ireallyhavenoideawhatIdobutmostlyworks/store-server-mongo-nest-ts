@@ -2,7 +2,6 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode } from '@ne
 import { UserService } from './user.service';
 import { UserDto } from './dto/user.dto';
 
-
 @Controller('user')
 export class UserController {
 

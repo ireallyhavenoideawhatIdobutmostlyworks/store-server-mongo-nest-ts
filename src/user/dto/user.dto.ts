@@ -1,9 +1,8 @@
 import { IsEmail, IsNotEmpty, IsString } from "class-validator"
 
-
 export class UserDto {
 
-    constructor(firstName: string, lastName: string, email:string) {
+    public constructor(firstName: string, lastName: string, email:string) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -12,14 +11,14 @@ export class UserDto {
     
     @IsNotEmpty()
     @IsString()
-     firstName: string
+    public readonly firstName: string
 
     @IsNotEmpty()
     @IsString()
-    readonly lastName: string
+    public readonly lastName: string
 
     @IsNotEmpty()
     @IsEmail()
     @IsString()
-    readonly email: string
+    public readonly email: string
 }
