@@ -30,7 +30,7 @@ export class UserController {
     if(isSuccess) {
       return response.status(HttpStatus.CREATED).json(ResponseCreator.response(ResponseStatus.SUCCESS));       
     } else { 
-      throw new HttpException(ResponseCreator.response(ResponseStatus.ERROR), HttpStatus.BAD_REQUEST);
+      return response.status(HttpStatus.BAD_REQUEST).json(ResponseCreator.response(ResponseStatus.ERROR));  
     }
   }
 
