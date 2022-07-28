@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus, Res, HttpException } from '@nestjs/common';
-=======
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode } from '@nestjs/common';
->>>>>>> 6de3da71b82574d6bfdb99af6273216d2649f759
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus, Res } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserDto } from './dto/user.dto';
 import { Response } from 'express';
