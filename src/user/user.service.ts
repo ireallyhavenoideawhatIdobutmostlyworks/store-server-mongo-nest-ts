@@ -1,5 +1,6 @@
 import { Body, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Bcrypt } from 'src/utils/bcrypt/Bcrypt';
 import { ObjectID, Repository } from 'typeorm';
 import { UserDto } from './dto/user.dto';
 import { UserDtoConverter } from './dto/user.dto.converter';
@@ -23,14 +24,16 @@ export class UserService {
     return UserDtoConverter.convertToDto(userEntity);
   }
 
-  public async create(userDto: UserDto): Promise<boolean> {
-    const userEntity: UserEntity = await this.usersRepository.findOne({where: {email: userDto.email}});
+  public async register(userDto: UserDto): Promise<boolean> {
+    const user: UserDto = await Bcrypt.decode(userDto);
+     
+    const userEntity: UserEntity = await this.usersRepository.findOne({where: {email: user.email}});
 
     if(userEntity !== null) {
       return false;
     }
 
-    await this.usersRepository.save(UserEntityConverter.convertToEntity(userDto));
+    await this.usersRepository.save(UserEntityConverter.convertToEntity(user));
     return true;
   }
 

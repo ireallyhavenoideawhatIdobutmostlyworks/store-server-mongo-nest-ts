@@ -7,6 +7,6 @@ export class UserEntityConverter {
 
 
     public static convertToEntity(userDto: UserDto): UserEntity {
-        return new UserEntity(userDto.firstName, userDto.lastName, userDto.email);
+        return new UserEntity(userDto.firstName, userDto.lastName, userDto.email, userDto.password);
     }
 }
