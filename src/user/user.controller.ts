@@ -5,7 +5,7 @@ import { Response } from 'express';
 import { ResponseCreator } from 'src/utils/response/response.creator';
 import { ResponseStatus } from 'src/utils/response/response.status';
 
-@Controller('user')
+@Controller('api/user')
 export class UserController {
 
   public constructor(private readonly userService: UserService) {}
@@ -23,9 +23,9 @@ export class UserController {
     return this.userService.findOneByEmail(email);
   }
 
-  @Post()
-  public async create(@Body() userDto: UserDto, @Res() response: Response) {
-    const isSuccess: boolean = await this.userService.create(userDto);
+  @Post('/register')
+  public async register(@Body() userDto: UserDto, @Res() response: Response) {
+    const isSuccess: boolean = await this.userService.register(userDto);
     
     if(isSuccess) {
       return response.status(HttpStatus.CREATED).json(ResponseCreator.response(ResponseStatus.SUCCESS));       
