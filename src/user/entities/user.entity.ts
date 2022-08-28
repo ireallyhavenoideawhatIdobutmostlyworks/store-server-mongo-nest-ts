@@ -1,14 +1,14 @@
-import { IsEmail, IsNotEmpty, IsString, Validate } from "class-validator";
-import e from "express";
-import { Entity, PrimaryGeneratedColumn, Column, ObjectID, ObjectIdColumn } from "typeorm"
+import { IsEmail, IsNotEmpty, IsString } from "class-validator";
+import { Entity, Column, ObjectID, ObjectIdColumn } from "typeorm"
 
 @Entity()
 export class UserEntity {
 
-    public constructor(firstName: string, lastName: string, email: string) {
+    public constructor(firstName: string, lastName: string, email: string, password: string) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.password = password;
     }
 
 
@@ -30,4 +30,9 @@ export class UserEntity {
     @IsString()
     @Column()
     public readonly email: string
+
+    @IsNotEmpty()
+    @IsString()
+    @Column()
+    public readonly password: string
 }

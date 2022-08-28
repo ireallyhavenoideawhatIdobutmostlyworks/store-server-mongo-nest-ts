@@ -1,10 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus, Res, HttpException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus, Res } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserDto } from './dto/user.dto';
-import {Response} from 'express';
+import { Response } from 'express';
 import { ResponseCreator } from 'src/utils/response/response.creator';
+import { ResponseStatus } from 'src/utils/response/response.status';
 
-@Controller('user')
+@Controller('api/user')
 export class UserController {
 
   public constructor(private readonly userService: UserService) {}
@@ -23,13 +24,13 @@ export class UserController {
   }
 
   @Post()
-  public async create(@Body() userDto: UserDto, @Res() response: Response) {
-    const isSuccess: boolean = await this.userService.create(userDto);
+  public async register(@Body() userDto: UserDto, @Res() response: Response) {
+    const isSuccess: boolean = await this.userService.register(userDto);
     
     if(isSuccess) {
-      return response.status(HttpStatus.CREATED).json(ResponseCreator.response());       
+      return response.status(HttpStatus.CREATED).json(ResponseCreator.response(ResponseStatus.SUCCESS));       
     } else { 
-      throw new HttpException(ResponseCreator.response(), HttpStatus.BAD_REQUEST);
+      return response.status(HttpStatus.BAD_REQUEST).json(ResponseCreator.response(ResponseStatus.ERROR));  
     }
   }
 
