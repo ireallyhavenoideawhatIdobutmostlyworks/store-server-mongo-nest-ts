@@ -23,7 +23,7 @@ export class UserController {
     return this.userService.findOneByEmail(email);
   }
 
-  @Post('/register')
+  @Post()
   public async register(@Body() userDto: UserDto, @Res() response: Response) {
     const isSuccess: boolean = await this.userService.register(userDto);
     
