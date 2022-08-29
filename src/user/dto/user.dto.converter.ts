@@ -7,6 +7,11 @@ export class UserDtoConverter {
 
 
     public static convertToDto(userEntity: UserEntity): UserDto {
-        return new UserDto(userEntity.firstName, userEntity.lastName, userEntity.email, userEntity.password);
+        return new UserDto(
+            userEntity.firstName, 
+            userEntity.lastName, 
+            userEntity.email, 
+            userEntity.password
+        );
     }
 }
