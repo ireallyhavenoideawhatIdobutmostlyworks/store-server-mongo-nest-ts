@@ -7,6 +7,6 @@ import { ProductEntity } from "./entities/product.entity";
 export class ProductService {
 
     public constructor(
-        @InjectRepository(ProductEntity) private usersRepository: Repository<ProductEntity>) {}
+        @InjectRepository(ProductEntity) private productRepository: Repository<ProductEntity>) {}
     
 }

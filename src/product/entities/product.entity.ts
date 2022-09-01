@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsNumber, IsString } from "class-validator";
 import { Entity, Column, ObjectID, ObjectIdColumn } from "typeorm"
-import { ProductSpecificationEntity } from "./product.specification.entity";
+import { ProductSpecificationEntity } from "../specification/entity/product.specification.entity";
 
 @Entity()
 export class ProductEntity {

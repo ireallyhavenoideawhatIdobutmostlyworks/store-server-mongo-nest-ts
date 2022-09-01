@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsString, IsNumber } from "class-validator";
-import { ProductSpecificationEntity } from "../entities/product.specification.entity";
+import { ProductSpecificationEntity } from "../specification/entity/product.specification.entity";
 
 export class ProductDto {
 
