@@ -9,6 +9,7 @@ export class ProductDtoConverter {
     public static convertToDto(productEntity: ProductEntity): ProductDto {
         return new ProductDto(
             productEntity.productName,
+            productEntity.uuid,
             productEntity.basePrice,
             productEntity.finalPrice,
             productEntity.discountPrice,

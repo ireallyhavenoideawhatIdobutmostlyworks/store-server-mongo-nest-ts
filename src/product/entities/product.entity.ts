@@ -5,8 +5,9 @@ import { ProductSpecificationEntity } from "../specification/entity/product.spec
 @Entity()
 export class ProductEntity {
 
-    public constructor(productName: string, basePrice: Number, finalPrice: Number, discountPrice: Number, description: string, productSpecification: ProductSpecificationEntity[]) {
+    public constructor(productName: string, uuid: string, basePrice: Number, finalPrice: Number, discountPrice: Number, description: string, productSpecification: ProductSpecificationEntity[]) {
         this.productName = productName;
+        this.uuid = uuid;
         this.basePrice = basePrice;
         this.finalPrice = finalPrice;
         this.discountPrice = discountPrice;
@@ -17,6 +18,11 @@ export class ProductEntity {
 
     @ObjectIdColumn()
     public readonly _id: ObjectID;
+
+    @IsNotEmpty()
+    @IsString()
+    @Column()
+    public readonly uuid: string
 
     @IsNotEmpty()
     @IsString()
