@@ -23,7 +23,7 @@ export class ProductService {
         return ProductDtoConverter.convertToDto(productEntity);
     }
     
-    public add(productDto: ProductDto): void {
+    public async add(productDto: ProductDto): Promise<void> {
         this.productRepository.save(ProductEntityConverter.convertToEntity(productDto));
     }
 
