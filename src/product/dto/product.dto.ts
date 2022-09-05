@@ -3,7 +3,7 @@ import { ProductSpecificationEntity } from "../specification/entity/product.spec
 
 export class ProductDto {
 
-    public constructor(productName: string, uuid: string, basePrice: Number, finalPrice: Number, discountPrice: Number, description: string, productSpecification: ProductSpecificationEntity[]) {
+    public constructor(productName: string, uuid: string, basePrice: Number, finalPrice: Number, discountPrice: Number, description: string , productSpecification: ProductSpecificationEntity) {
         this.productName = productName;
         this.uuid = uuid;
         this.basePrice = basePrice;
@@ -39,5 +39,5 @@ export class ProductDto {
     public readonly description: string
 
     @IsNotEmpty()
-    public readonly productSpecification: ProductSpecificationEntity[]
+    public readonly productSpecification: ProductSpecificationEntity
 }
